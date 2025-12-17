@@ -1,0 +1,229 @@
+/* ---------------------------------------------------
+   🌐 GLOBAL SETTINGS
+--------------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background-color: #f8f9fa;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ---------------------------------------------------
+   🔹 PALETTE ORANGE CLAIR
+--------------------------------------------------- */
+
+:root {
+    --orange-main: #FFA857;      /* Couleur principale */
+    --orange-hover: #F9A66C;     /* Hover boutons */
+    --orange-bg: #FFD4A3;        /* Fonds clairs */
+}
+
+/* ---------------------------------------------------
+   🔹 HEADER
+--------------------------------------------------- */
+
+header {
+    background-color: var(--orange-main) !important;
+}
+
+header .logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+header .nav-link {
+    font-size: 1rem;
+    color: white !important;
+    transition: 0.3s;
+}
+
+header .nav-link:hover {
+    color: var(--orange-hover) !important;
+}
+
+/* ---------------------------------------------------
+   🔹 HERO SECTION
+--------------------------------------------------- */
+
+.hero {
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero .container {
+    position: relative;
+    z-index: 10;
+}
+
+/* ---------------------------------------------------
+   🔹 TITRES SECTIONS
+--------------------------------------------------- */
+
+section h2 {
+    font-weight: 600;
+    color: var(--orange-main);
+}
+
+/* Icons */
+.fa-solid {
+    color: var(--orange-main);
+}
+
+/* ---------------------------------------------------
+   🔹 VEHICLE CARDS
+--------------------------------------------------- */
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card img {
+    border-radius: 12px 12px 0 0;
+}
+
+/* ---------------------------------------------------
+   🔹 BOUTONS PERSONNALISÉS
+--------------------------------------------------- */
+
+.btn-primary {
+    background-color: var(--orange-main) !important;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: var(--orange-hover) !important;
+}
+
+/* ---------------------------------------------------
+   🔹 SECTIONS ORANGE
+--------------------------------------------------- */
+
+.bg-light {
+    background-color: var(--orange-bg) !important;
+}
+
+/* ---------------------------------------------------
+   🔹 FOOTER
+--------------------------------------------------- */
+
+footer {
+    background-color: var(--orange-main) !important;
+    color: white;
+    font-size: 0.95rem;
+}
+
+/* ---------------------------------------------------
+   📱 RESPONSIVE DESIGN
+--------------------------------------------------- */
+
+/* 🔸 Mobile ≤ 480px */
+@media (max-width: 480px) {
+
+    header .nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .card {
+        margin-bottom: 25px;
+    }
+}
+
+/* 🔸 Tablettes / Moyens écrans */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+}
+
+/* 🔸 Grands écrans ≥ 1200px */
+@media (min-width: 1200px) {
+    .hero h2 {
+        font-size: 3.2rem;
+    }
+}
+.product-card {
+    width: 300px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 10px;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.product-card .description {
+    font-size: 14px;
+    color: #444;
+    margin: 10px 0;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.available {
+    background: #c8f7c5;
+    color: #1e7e34;
+}
+
+.unavailable {
+    background: #f7c5c5;
+    color: #b21f2d;
+}
+
+.btn-reserver {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #0052cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
