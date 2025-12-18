@@ -1,7 +1,6 @@
-/* ---------------------------------------------------
-   🌐 GLOBAL SETTINGS
---------------------------------------------------- */
-
+/* =====================================================
+   🌐 RESET & GLOBAL
+===================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -10,220 +9,690 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #fff8f0;
+    color: #333;
     line-height: 1.6;
-    color: #222;
-    background-color: #f8f9fa;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: 'Poppins', sans-serif;
 }
 
-/* ---------------------------------------------------
-   🔹 PALETTE ORANGE CLAIR
---------------------------------------------------- */
-
+/* =====================================================
+   🎨 PALETTE ORANGE CLAIR
+===================================================== */
 :root {
-    --orange-main: #FFA857;      /* Couleur principale */
-    --orange-hover: #F9A66C;     /* Hover boutons */
-    --orange-bg: #FFD4A3;        /* Fonds clairs */
+    --orange-main: #FFA857;
+    --orange-hover: #F9A66C;
+    --orange-bg: #FFD4A3;
+    --orange-dark: #ff7f00;
 }
 
-/* ---------------------------------------------------
-   🔹 HEADER
---------------------------------------------------- */
+/* =====================================================
+   🔗 LIENS
+===================================================== */
+a {
+    text-decoration: none;
+    color: var(--orange-dark);
+}
 
+a:hover {
+    color: #e06600;
+}
+
+/* =====================================================
+   🔹 HEADER & MENU (LOGO AU CENTRE)
+===================================================== */
 header {
-    background-color: var(--orange-main) !important;
+    background-color: var(--orange-main);
+    padding: 20px 0;
 }
 
-header .logo {
-    font-size: 1.8rem;
-    font-weight: 600;
+.header-menu {
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu li a {
     color: white;
-}
-
-header .nav-link {
-    font-size: 1rem;
-    color: white !important;
+    font-weight: 500;
     transition: 0.3s;
 }
 
-header .nav-link:hover {
-    color: var(--orange-hover) !important;
+.menu li a:hover {
+    color: var(--orange-hover);
 }
 
-/* ---------------------------------------------------
-   🔹 HERO SECTION
---------------------------------------------------- */
+/* Bouton Login */
+.btn-login {
+    background-color: white;
+    color: var(--orange-dark);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 2px solid white;
+}
 
+.btn-login:hover {
+    background-color: var(--orange-hover);
+    color: white;
+    border-color: var(--orange-hover);
+}
+
+/* LOGO AU MILIEU DU MENU */
+.menu-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 15px;
+    background-color: white;
+    border-radius: 50px;
+    min-width: 200px;
+}
+
+.menu-logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--orange-main);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.logo-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--orange-dark);
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--orange-dark);
+    line-height: 1.2;
+    opacity: 0.9;
+}
+
+/* =====================================================
+   🦸 HERO (PAGE INDEX)
+===================================================== */
 .hero {
+    background: url("location.jpg") center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
     position: relative;
 }
 
 .hero::after {
     content: "";
     position: absolute;
-    top: 0; left: 0;
-    height: 100%; width: 100%;
-    background: rgba(0, 0, 0, 0.45);
+    inset: 0;
+    background: rgba(0,0,0,0.45);
 }
 
 .hero .container {
     position: relative;
-    z-index: 10;
+    z-index: 2;
 }
 
-/* ---------------------------------------------------
-   🔹 TITRES SECTIONS
---------------------------------------------------- */
-
-section h2 {
-    font-weight: 600;
-    color: var(--orange-main);
+.hero h1,
+.hero p {
+    color: rgb(255, 255, 255);
 }
 
-/* Icons */
-.fa-solid {
-    color: var(--orange-main);
+/* Section barre de recherche */
+.search-section {
+    background-color: var(--orange-bg);
+    padding: 20px 0;
+    border-bottom: 2px solid var(--orange-main);
 }
 
-/* ---------------------------------------------------
-   🔹 VEHICLE CARDS
---------------------------------------------------- */
+/* Accueil: éviter que la barre de recherche fasse "double menu" visuellement */
+body.home-page .search-section {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 12px 0 0;
+}
 
-.card {
+body.home-page .search-bar {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+
+/* Barre de recherche */
+.search-bar-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-bar {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.search-bar .form-control {
     border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 50px 0 0 50px;
 }
 
-.card:hover {
-    transform: translateY(-8px);
+.search-bar .form-control:focus {
+    box-shadow: none;
+    border-color: transparent;
 }
 
-.card img {
-    border-radius: 12px 12px 0 0;
-}
-
-/* ---------------------------------------------------
-   🔹 BOUTONS PERSONNALISÉS
---------------------------------------------------- */
-
-.btn-primary {
-    background-color: var(--orange-main) !important;
+.search-bar .btn {
+    border-radius: 0 50px 50px 0;
+    padding: 12px 25px;
     border: none;
-    border-radius: 6px;
-    padding: 10px 18px;
-    font-weight: 600;
 }
 
-.btn-primary:hover {
-    background-color: var(--orange-hover) !important;
-}
-
-/* ---------------------------------------------------
-   🔹 SECTIONS ORANGE
---------------------------------------------------- */
-
-.bg-light {
-    background-color: var(--orange-bg) !important;
-}
-
-/* ---------------------------------------------------
-   🔹 FOOTER
---------------------------------------------------- */
-
-footer {
-    background-color: var(--orange-main) !important;
+/* =====================================================
+   🔘 BOUTONS
+===================================================== */
+.btn-primary,
+.btn-reserver {
+    background-color: var(--orange-main);
     color: white;
-    font-size: 0.95rem;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* ---------------------------------------------------
-   📱 RESPONSIVE DESIGN
---------------------------------------------------- */
-
-/* 🔸 Mobile ≤ 480px */
-@media (max-width: 480px) {
-
-    header .nav {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero h2 {
-        font-size: 1.8rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .card {
-        margin-bottom: 25px;
-    }
+.btn-primary:hover,
+.btn-reserver:hover {
+    background-color: var(--orange-hover);
 }
 
-/* 🔸 Tablettes / Moyens écrans */
-@media (max-width: 768px) {
-    .hero h2 {
-        font-size: 2.2rem;
-    }
+.btn-primary.active,
+.filter-btn.active {
+    background-color: var(--orange-dark);
+    border-color: var(--orange-dark);
+    box-shadow: 0 2px 5px rgba(255,127,0,0.3);
 }
 
-/* 🔸 Grands écrans ≥ 1200px */
-@media (min-width: 1200px) {
-    .hero h2 {
-        font-size: 3.2rem;
-    }
+/* =====================================================
+   🚗 CATALOGUE – CARTES VOITURES
+===================================================== */
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
+
+/* Espacement entre les conteneurs de voitures */
+.vehicle {
+    margin-bottom: 20px;
+}
+
+.vehicle .card {
+    margin-bottom: 0;
+    padding: 15px;
+    border: 1px solid #ffcc99;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(255,127,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255,127,0,0.3);
+}
+
+.vehicle .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.vehicle .card h5 {
+    color: var(--orange-dark);
+    font-weight: 600;
+    margin-bottom: 10px;
+    flex-grow: 0;
+}
+
+.vehicle .card p {
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    flex-grow: 0;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.card-buttons .btn {
+    flex: 1;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+
+.btn-outline-primary {
+    border-color: var(--orange-main);
+    color: var(--orange-main);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--orange-main);
+    border-color: var(--orange-main);
+    color: white;
+}
+
 .product-card {
     width: 300px;
-    background: white;
-    padding: 15px;
+    background-color: #fff3e6;
+    border: 1px solid #ffcc99;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
     text-align: center;
-    margin: 10px;
+    box-shadow: 0 5px 15px rgba(255,127,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(255,127,0,0.3);
 }
 
 .product-card img {
     width: 100%;
-    border-radius: 12px;
+    height: 200px;
+    object-fit: cover;
 }
 
-.product-card .description {
-    font-size: 14px;
-    color: #444;
+.product-card h3 {
+    color: var(--orange-dark);
     margin: 10px 0;
 }
 
+.product-card .description {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Statut */
 .status {
     display: inline-block;
     padding: 5px 12px;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 0.85rem;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.available {
-    background: #c8f7c5;
-    color: #1e7e34;
+.status.available {
+    background-color: #ffcc99;
+    color: #ff6600;
 }
 
-.unavailable {
-    background: #f7c5c5;
-    color: #b21f2d;
+.status.unavailable {
+    background-color: #ddd;
+    color: #888;
 }
 
-.btn-reserver {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background: #0052cc;
+/* =====================================================
+   📩 FORMULAIRES (CONTACT & RÉSERVATION)
+===================================================== */
+.bg-light-orange {
+    background-color: var(--orange-bg);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--orange-dark);
+}
+
+/* =====================================================
+   🔹 FOOTER
+===================================================== */
+footer {
+    background-color: var(--orange-main);
     color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
 }
+
+.social-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #333;
+}
+
+/* =====================================================
+   📱 RESPONSIVE
+===================================================== */
+/* Écrans moyens (tablettes / laptops) */
+@media (max-width: 992px) {
+    header {
+        padding: 16px 0;
+    }
+
+    .menu {
+        gap: 16px;
+    }
+
+    .menu-logo {
+        min-width: 180px;
+        padding: 6px 12px;
+    }
+
+    .menu-logo img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .logo-title {
+        font-size: 0.95rem;
+    }
+
+    .logo-subtitle {
+        font-size: 0.72rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .menu-logo {
+        order: -1;
+        margin-bottom: 10px;
+    }
+
+    .hero {
+        height: 60vh;
+    }
+
+    .product-card img {
+        height: 170px;
+    }
+
+    .search-bar-container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .search-bar .form-control {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    .search-bar .btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Petits écrans (mobiles) */
+@media (max-width: 576px) {
+    header {
+        padding: 12px 0;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-logo {
+        order: -1;
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+    }
+
+    .logo-text {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero {
+        height: 50vh;
+    }
+
+    /* Barre de recherche (index) */
+    .search-bar {
+        flex-wrap: wrap;
+        border-radius: 16px;
+    }
+
+    .search-bar .form-control {
+        flex: 1 1 100%;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .search-bar .btn {
+        width: 100%;
+        border-radius: 0 0 16px 16px;
+    }
+
+    /* Images des cartes */
+    .vehicle .card img {
+        height: 160px;
+    }
+}
+
+/* Carousel voitures les plus louées */
+.carousel-inner {
+    padding: 20px 0;
+}
+
+.carousel-item .card {
+    border: 1px solid #ffcc99;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.carousel-item .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255,127,0,0.3);
+}
+
+.carousel-item .card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    background-color: var(--orange-main);
+    opacity: 0.8;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-indicators button {
+    background-color: var(--orange-main);
+}
+
+/* Cartes agences */
+.agence-card {
+    border: 2px solid var(--orange-main);
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.agence-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255,127,0,0.3);
+}
+
+.agence-card .card-body {
+    padding: 30px;
+}
+
+/* Badges de disponibilité */
+.vehicle .card .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.vehicle .card .btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Animation pour la sélection automatique du véhicule */
+#vehicule.auto-selected {
+    border: 2px solid var(--orange-main);
+    box-shadow: 0 0 10px rgba(255, 167, 0, 0.5);
+    animation: pulse-border 2s ease-in-out;
+}
+
+@keyframes pulse-border {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 167, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 167, 0, 0.8);
+    }
+}
+
+/* Accessibilité - Navigation au clavier */
+*:focus {
+    outline: 3px solid var(--orange-main);
+    outline-offset: 2px;
+}
+
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 3px solid var(--orange-main);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(255, 167, 0, 0.3);
+}
+
+/* Améliorer la visibilité du focus pour les boutons */
+.btn:focus-visible {
+    outline: 3px solid var(--orange-dark);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(255, 127, 0, 0.4);
+}
+
+/* Skip link pour navigation au clavier */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--orange-dark);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Améliorer le contraste et la lisibilité */
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-group .btn {
+    min-width: 120px;
+}
+
+/* Style pour les selects de filtre */
+.filter-select,
+#filtreCategorie,
+#filtreMarque {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border: 2px solid var(--orange-main);
+    border-radius: 8px;
+    background-color: white;
+    color: var(--orange-dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-select:hover,
+#filtreCategorie:hover,
+#filtreMarque:hover {
+    border-color: var(--orange-dark);
+    box-shadow: 0 2px 8px rgba(255,127,0,0.2);
+}
+
+.filter-select:focus,
+#filtreCategorie:focus,
+#filtreMarque:focus {
+    outline: 3px solid var(--orange-main);
+    outline-offset: 2px;
+    border-color: var(--orange-dark);
+    box-shadow: 0 0 0 3px rgba(255,127,0,0.3);
+}
+
+/* Améliorer l'accessibilité des cartes */
+.vehicle .card {
+    position: relative;
+}
+
+.vehicle .card:focus-within {
+    outline: 3px solid var(--orange-main);
+    outline-offset: 5px;
+}
+
+

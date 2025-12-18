@@ -5,64 +5,628 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réservation - Loca Mode</title>
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-    <script src="js.js"></script>
 
 <body>
 
-<header class="py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="logo">Loca Mode</h1>
-        <nav>
-            <ul class="nav">
-                <li class="nav-item"><a href="index.html" class="nav-link text-white">Accueil</a></li>
-                <li class="nav-item"><a href="catalogue.html" class="nav-link text-white">Catalogue</a></li>
-                <li class="nav-item"><a href="reservation.html" class="nav-link text-white">Réserver</a></li>
-            </ul>
-        </nav>
-    </div>
+<!-- Skip link pour navigation au clavier -->
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="container header-menu">
+    <nav role="navigation" aria-label="Menu principal">
+      <ul class="menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="catalogue.html">Voitures</a></li>
+
+        <li class="menu-logo">
+          <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;" aria-label="Retour à la page d'accueil - Loca Mode">
+            <img src="logo.png" alt="Logo Loca Mode">
+            <div class="logo-text">
+              <span class="logo-title">LOCA-MOVE</span>
+              <span class="logo-subtitle">Location de voitures</span>
+            </div>
+          </a>
+        </li>
+
+        <li><a href="agence.html">Agence</a></li>
+        <li><a href="reservation.html" aria-current="page">Réservation</a></li>
+        <li><a href="contact.html">Contactez‑nous</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
+<main id="main-content">
 <section class="py-5">
     <div class="container">
         <h2 class="text-center mb-4">Réserver un véhicule</h2>
 
-        <form class="p-4 shadow rounded bg-light-orange">
+        <form class="p-4 shadow rounded bg-light-orange" id="reservationForm">
+
+            <!-- Nom -->
+            <div class="mb-3">
+                <label class="form-label" for="nom">Nom <span class="text-danger">*</span></label>
+                <input type="text" id="nom" class="form-control" placeholder="Votre nom" required aria-required="true" autocomplete="family-name">
+                <div class="invalid-feedback">Veuillez entrer votre nom.</div>
+            </div>
+
+            <!-- Prénom -->
+            <div class="mb-3">
+                <label class="form-label" for="prenom">Prénom <span class="text-danger">*</span></label>
+                <input type="text" id="prenom" class="form-control" placeholder="Votre prénom" required aria-required="true" autocomplete="given-name">
+                <div class="invalid-feedback">Veuillez entrer votre prénom.</div>
+            </div>
+
+            <!-- Téléphone -->
+            <div class="mb-3">
+                <label class="form-label" for="telephone1">Numéro de téléphone 1 <span class="text-danger">*</span></label>
+                <input type="tel" id="telephone1" class="form-control" placeholder="Ex: +216 12 345 678" required aria-required="true" inputmode="tel" autocomplete="tel" pattern="^[+]?[\d\s-]{8,15}$">
+                <div class="invalid-feedback">Veuillez entrer un numéro de téléphone valide.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="telephone2">Numéro de téléphone 2 (optionnel)</label>
+                <input type="tel" id="telephone2" class="form-control" placeholder="Ex: +216 98 765 432" inputmode="tel" autocomplete="tel" pattern="^[+]?[\d\s-]{8,15}$">
+                <div class="invalid-feedback">Veuillez entrer un numéro de téléphone valide.</div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label" for="email">Adresse email <span class="text-danger">*</span></label>
+                <input type="email" id="email" class="form-control" placeholder="exemple@email.com" required aria-required="true" autocomplete="email">
+                <div class="invalid-feedback">Veuillez entrer une adresse email valide.</div>
+            </div>
 
             <!-- Type -->
             <div class="mb-3">
-                <label class="form-label">Véhicule</label>
-                <select id="vehicule" class="form-select" onchange="mettrePrix()">
-                    <option value="90">Clio 5 – 90 DT/j</option>
-                    <option value="130">Yamaha MT‑07 – 130 DT/j</option>
-                    <option value="150">Tiguan – 150 DT/j</option>
+                <label class="form-label" for="vehicule">Véhicule <span class="text-danger">*</span></label>
+                <select id="vehicule" class="form-select" onchange="mettrePrix(); verifierDisponibilite();" required aria-label="Sélectionner un véhicule">
+                    <option value="110" data-vehicule="Hyundai i10">Hyundai i10 – 110 DT/j</option>
+                    <option value="100" data-vehicule="Skoda octavia">Skoda octavia – 100 DT/j</option>
+                    <option value="120" data-vehicule="Seat ibiza BVA">Seat ibiza BVA – 120 DT/j</option>
+                    <option value="150" data-vehicule="SKODA FABIA">SKODA FABIA – 150 DT/j</option>
+                    <option value="150" data-vehicule="Hyundai i10 BVA">Hyundai i10 BVA – 150 DT/j</option>
+                    <option value="150" data-vehicule="SUZUKI CIAZ">SUZUKI CIAZ – 150 DT/j</option>
+                    <option value="160" data-vehicule="Cupra Leon">Cupra Leon – 160 DT/j</option>
+                    <option value="160" data-vehicule="Seat Arona">Seat Arona – 160 DT/j</option>
+                    <option value="170" data-vehicule="Seat Ibiza">Seat Ibiza – 170 DT/j</option>
+                    <option value="170" data-vehicule="Suziki Ertiga">Suziki Ertiga – 170 DT/j</option>
+                    <option value="180" data-vehicule="VOLKSWAGEN POLO">VOLKSWAGEN POLO – 180 DT/j</option>
+                    <option value="185" data-vehicule="Skoda Scala">Skoda Scala – 185 DT/j</option>
+                    <option value="200" data-vehicule="VOLKSWAGEN POLO SEDAN">VOLKSWAGEN POLO SEDAN – 200 DT/j</option>
+                    <option value="250" data-vehicule="Seat ATECA">Seat ATECA – 250 DT/j</option>
+                    <option value="300" data-vehicule="Mercedes class E">Mercedes class E – 300 DT/j</option>
                 </select>
+                <div id="disponibiliteMessage" class="mt-2"></div>
             </div>
 
-            <!-- Jours -->
+            <!-- Date de récupération -->
             <div class="mb-3">
-                <label class="form-label">Nombre de jours</label>
-                <input type="number" id="jours" class="form-control" min="1" value="1" oninput="calculerTotal()">
+                <label class="form-label" for="dateRecuperation">Date de récupération <span class="text-danger">*</span></label>
+                <input type="date" id="dateRecuperation" class="form-control" required onchange="calculerJours(); verifierDisponibilite(); mettreAJourDateRetourMin();">
+                <div class="invalid-feedback">Veuillez sélectionner une date de récupération.</div>
+            </div>
+
+            <!-- Date de retour -->
+            <div class="mb-3">
+                <label class="form-label" for="dateRetour">Date de retour <span class="text-danger">*</span></label>
+                <input type="date" id="dateRetour" class="form-control" required onchange="calculerJours(); verifierDisponibilite();">
+                <div class="invalid-feedback">Veuillez sélectionner une date de retour.</div>
+            </div>
+
+            <!-- Jours (calculé automatiquement) -->
+            <div class="mb-3">
+                <label class="form-label" for="jours">Nombre de jours</label>
+                <input type="number" id="jours" class="form-control" min="1" value="1" readonly>
+            </div>
+
+            <!-- Prix par jour -->
+            <div class="mb-3">
+                <label class="form-label" for="prixParJour">Prix par jour</label>
+                <input type="text" id="prixParJour" class="form-control" readonly>
             </div>
 
             <!-- Total -->
             <div class="mb-3">
-                <label class="form-label">Total</label>
+                <label class="form-label" for="total">Total</label>
                 <input type="text" id="total" class="form-control" readonly>
             </div>
 
-            <button class="btn btn-primary w-100">Confirmer</button>
+            <button type="button" class="btn btn-primary w-100" id="btnConfirmer" onclick="afficherConfirmation()">Confirmer</button>
 
         </form>
     </div>
 </section>
+</main>
 
-<footer class="text-white text-center py-3">
-    <p>&copy; 2025 Loca Mode</p>
+<!-- Modal de confirmation -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Confirmation de réservation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Êtes-vous sûr de vouloir confirmer cette réservation ?</strong></p>
+        <p>Veuillez vérifier vos informations avant de confirmer.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="annulerReservation()" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" onclick="confirmerReservation()">Oui, confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de succès -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="successModalLabel"><i class="fas fa-check-circle"></i> Réservation confirmée</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Votre réservation a été prise en compte avec succès !</strong></p>
+        <p>Nous vous contacterons dans moins de 12 heures pour finaliser votre réservation.</p>
+        <p class="mb-0">Merci de votre confiance !</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="reinitialiserFormulaire()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <div class="container text-center">
+        <p>Suivez‑nous sur les réseaux sociaux</p>
+
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+        </div>
+
+        <p class="mt-2">© 2025 Loca Mode – Tous droits réservés</p>
+    </div>
 </footer>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="script/app.js"></script>
+<script>
+// NB: `vehiculesLoues` est déjà défini dans `script/app.js`.
+// On ne le redéfinit pas ici pour éviter: "Identifier 'vehiculesLoues' has already been declared".
+
+// Fonction pour pré-sélectionner le véhicule depuis localStorage
+function preselecterVehicule() {
+    const vehiculeReserve = localStorage.getItem('vehiculeReserve');
+    const prixReserve = localStorage.getItem('prixReserve');
+    
+    if (!vehiculeReserve || !prixReserve) {
+        return false;
+    }
+    
+    const select = document.getElementById('vehicule');
+    if (!select) {
+        console.log('Select non trouvé');
+        return false;
+    }
+    
+    const options = select.options;
+    if (!options || options.length === 0) {
+        console.log('Aucune option trouvée');
+        return false;
+    }
+    
+    let trouve = false;
+    let indexTrouve = -1;
+    const vehiculeReserveLower = vehiculeReserve.toLowerCase().trim();
+    
+    // Priorité 1: Recherche par nom exact dans data-vehicule
+    for (let i = 0; i < options.length; i++) {
+        const optionVehicule = options[i].getAttribute('data-vehicule');
+        if (optionVehicule && optionVehicule.toLowerCase().trim() === vehiculeReserveLower) {
+            indexTrouve = i;
+            trouve = true;
+            break;
+        }
+    }
+    
+    // Priorité 2: Recherche par nom dans le texte de l'option
+    if (!trouve) {
+        for (let i = 0; i < options.length; i++) {
+            const optionText = options[i].textContent.toLowerCase();
+            if (optionText.includes(vehiculeReserveLower)) {
+                indexTrouve = i;
+                trouve = true;
+                break;
+            }
+        }
+    }
+    
+    // Priorité 3: Recherche par prix uniquement
+    if (!trouve) {
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === prixReserve) {
+                indexTrouve = i;
+                trouve = true;
+                break;
+            }
+        }
+    }
+    
+    if (trouve && indexTrouve >= 0) {
+        // Sélectionner l'option
+        select.selectedIndex = indexTrouve;
+        
+        // Ajouter une classe pour indiquer la sélection automatique
+        select.classList.add('auto-selected');
+        
+        // Forcer la mise à jour immédiate
+        setTimeout(function() {
+            // Vérifier que la sélection est bien appliquée
+            if (select.selectedIndex === indexTrouve) {
+                // Déclencher l'événement change manuellement
+                mettrePrix();
+                verifierDisponibilite();
+                
+                // Faire défiler vers le formulaire pour montrer la sélection
+                setTimeout(function() {
+                    select.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    select.focus();
+                    
+                    setTimeout(function() {
+                        select.blur();
+                        // Retirer la classe d'animation après 2 secondes
+                        setTimeout(function() {
+                            select.classList.remove('auto-selected');
+                        }, 2000);
+                    }, 500);
+                }, 100);
+            } else {
+                // Si la sélection n'a pas fonctionné, réessayer
+                select.selectedIndex = indexTrouve;
+                mettrePrix();
+                verifierDisponibilite();
+            }
+        }, 100);
+        
+        // Nettoyer localStorage après utilisation
+        localStorage.removeItem('vehiculeReserve');
+        localStorage.removeItem('prixReserve');
+        
+        return true;
+    } else {
+        console.log('Véhicule non trouvé:', vehiculeReserve, prixReserve);
+    }
+    
+    return false;
+}
+
+// Initialiser les dates min (aujourd'hui)
+window.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    const dateRecup = document.getElementById('dateRecuperation');
+    const dateRetour = document.getElementById('dateRetour');
+    
+    if (dateRecup) {
+        dateRecup.setAttribute('min', today);
+    }
+    if (dateRetour) {
+        dateRetour.setAttribute('min', today);
+    }
+    
+    // Pré-sélectionner le véhicule avec un petit délai pour s'assurer que le DOM est prêt
+    // Essayer plusieurs fois pour s'assurer que ça fonctionne
+    setTimeout(function() {
+        if (!preselecterVehicule()) {
+            // Réessayer après 200ms si la première tentative échoue
+            setTimeout(function() {
+                preselecterVehicule();
+            }, 200);
+        }
+    }, 150);
+    
+    // Vérifier la disponibilité par défaut
+    verifierDisponibilite();
+    
+    // Mettre à jour la date min de retour quand la date de récupération change
+    if (dateRecup) {
+        dateRecup.addEventListener('change', mettreAJourDateRetourMin);
+    }
+});
+
+// Mettre à jour la date minimum de retour selon la date de récupération
+function mettreAJourDateRetourMin() {
+    const dateRecup = document.getElementById('dateRecuperation').value;
+    if (dateRecup) {
+        document.getElementById('dateRetour').setAttribute('min', dateRecup);
+        // Si la date de retour est antérieure à la nouvelle date min, la réinitialiser
+        const dateRetour = document.getElementById('dateRetour').value;
+        if (dateRetour && dateRetour < dateRecup) {
+            document.getElementById('dateRetour').value = '';
+            calculerJours();
+        }
+    }
+}
+
+// Calculer le nombre de jours à partir des dates
+function calculerJours() {
+    const dateRecupStr = document.getElementById('dateRecuperation').value;
+    const dateRetourStr = document.getElementById('dateRetour').value;
+    
+    if (!dateRecupStr || !dateRetourStr) {
+        document.getElementById('jours').value = 1;
+        calculerTotal();
+        return;
+    }
+    
+    const dateRecup = new Date(dateRecupStr + 'T00:00:00');
+    const dateRetour = new Date(dateRetourStr + 'T00:00:00');
+    
+    if (dateRetour < dateRecup) {
+        alert('La date de retour doit être après la date de récupération !');
+        document.getElementById('dateRetour').value = '';
+        document.getElementById('jours').value = 1;
+        calculerTotal();
+        return;
+    }
+    
+    // Calculer la différence en jours (ex: 2025-12-01 -> 2025-12-02 = 1 jour)
+    const diffTime = dateRetour.getTime() - dateRecup.getTime();
+    const diffDaysRaw = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.max(1, diffDaysRaw); // au minimum 1 jour
+    
+    if (diffDays > 0) {
+        document.getElementById('jours').value = diffDays;
+        calculerTotal();
+    } else {
+        document.getElementById('jours').value = 1;
+        calculerTotal();
+    }
+}
+
+// Vérifier la disponibilité du véhicule
+function verifierDisponibilite() {
+    const select = document.getElementById('vehicule');
+    const selectedOption = select.options[select.selectedIndex];
+    const nomVehicule = selectedOption.getAttribute('data-vehicule');
+    const messageDiv = document.getElementById('disponibiliteMessage');
+    const btnConfirmer = document.getElementById('btnConfirmer');
+    
+    if (vehiculesLoues.includes(nomVehicule)) {
+        messageDiv.innerHTML = '<div class="alert alert-danger"><i class="fas fa-times-circle"></i> Ce véhicule est actuellement loué et non disponible.</div>';
+        btnConfirmer.disabled = true;
+        btnConfirmer.classList.add('disabled');
+    } else {
+        messageDiv.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle"></i> Ce véhicule est disponible.</div>';
+        btnConfirmer.disabled = false;
+        btnConfirmer.classList.remove('disabled');
+    }
+}
+
+// Fonction de validation des champs
+function validerFormulaire() {
+    const nom = document.getElementById('nom').value.trim();
+    const prenom = document.getElementById('prenom').value.trim();
+    const telephone1El = document.getElementById('telephone1');
+    const telephone2El = document.getElementById('telephone2');
+    const emailEl = document.getElementById('email');
+    const vehicule = document.getElementById('vehicule').value;
+    const dateRecup = document.getElementById('dateRecuperation').value;
+    const dateRetour = document.getElementById('dateRetour').value;
+    
+    let isValid = true;
+
+    const telephone1 = telephone1El ? telephone1El.value.trim() : '';
+    const telephone2 = telephone2El ? telephone2El.value.trim() : '';
+    const email = emailEl ? emailEl.value.trim() : '';
+    const isValidPhone = (value) => /^[+]?[\d\s-]{8,15}$/.test(value);
+    
+    // Valider le nom
+    if (!nom) {
+        document.getElementById('nom').classList.add('is-invalid');
+        isValid = false;
+    } else {
+        document.getElementById('nom').classList.remove('is-invalid');
+        document.getElementById('nom').classList.add('is-valid');
+    }
+    
+    // Valider le prénom
+    if (!prenom) {
+        document.getElementById('prenom').classList.add('is-invalid');
+        isValid = false;
+    } else {
+        document.getElementById('prenom').classList.remove('is-invalid');
+        document.getElementById('prenom').classList.add('is-valid');
+    }
+
+    // Valider téléphone 1
+    if (!telephone1 || !isValidPhone(telephone1)) {
+        if (telephone1El) telephone1El.classList.add('is-invalid');
+        isValid = false;
+    } else {
+        if (telephone1El) {
+            telephone1El.classList.remove('is-invalid');
+            telephone1El.classList.add('is-valid');
+        }
+    }
+
+    // Valider téléphone 2 (optionnel)
+    if (telephone2El) {
+        if (telephone2 && !isValidPhone(telephone2)) {
+            telephone2El.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            telephone2El.classList.remove('is-invalid');
+            if (telephone2) telephone2El.classList.add('is-valid');
+            else telephone2El.classList.remove('is-valid');
+        }
+    }
+
+    // Valider email
+    if (!email || (emailEl && !emailEl.checkValidity())) {
+        if (emailEl) emailEl.classList.add('is-invalid');
+        isValid = false;
+    } else {
+        if (emailEl) {
+            emailEl.classList.remove('is-invalid');
+            emailEl.classList.add('is-valid');
+        }
+    }
+    
+    // Valider le véhicule
+    if (!vehicule) {
+        document.getElementById('vehicule').classList.add('is-invalid');
+        isValid = false;
+    } else {
+        document.getElementById('vehicule').classList.remove('is-invalid');
+    }
+    
+    // Valider les dates
+    if (!dateRecup) {
+        document.getElementById('dateRecuperation').classList.add('is-invalid');
+        isValid = false;
+    } else {
+        document.getElementById('dateRecuperation').classList.remove('is-invalid');
+    }
+    
+    if (!dateRetour) {
+        document.getElementById('dateRetour').classList.add('is-invalid');
+        isValid = false;
+    } else {
+        document.getElementById('dateRetour').classList.remove('is-invalid');
+    }
+    
+    // Vérifier que la date de retour est après la date de récupération
+    if (dateRecup && dateRetour && new Date(dateRetour) < new Date(dateRecup)) {
+        alert('La date de retour doit être après la date de récupération.');
+        document.getElementById('dateRetour').classList.add('is-invalid');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+// Afficher la modal de confirmation
+function afficherConfirmation() {
+    // Valider tous les champs
+    if (!validerFormulaire()) {
+        alert('Veuillez remplir tous les champs obligatoires (marqués d\'un *).');
+        return false;
+    }
+    
+    const vehiculeSelect = document.getElementById('vehicule');
+    const vehicule = vehiculeSelect.options[vehiculeSelect.selectedIndex].getAttribute('data-vehicule');
+    
+    if (vehiculesLoues.includes(vehicule)) {
+        alert('Ce véhicule n\'est pas disponible. Veuillez choisir un autre véhicule.');
+        return false;
+    }
+    
+    const dateRecup = document.getElementById('dateRecuperation').value;
+    const dateRetour = document.getElementById('dateRetour').value;
+    
+    if (!dateRecup || !dateRetour) {
+        alert('Veuillez sélectionner les dates de récupération et de retour.');
+        return false;
+    }
+    
+    if (new Date(dateRetour) < new Date(dateRecup)) {
+        alert('La date de retour doit être après la date de récupération.');
+        return false;
+    }
+    
+    // Afficher la modal de confirmation
+    const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    modal.show();
+}
+
+// Annuler la réservation et vider le formulaire
+function annulerReservation() {
+    document.getElementById('reservationForm').reset();
+    document.getElementById('jours').value = 1;
+    document.getElementById('total').value = '';
+    document.getElementById('disponibiliteMessage').innerHTML = '';
+    
+    // Retirer les classes de validation
+    document.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
+        el.classList.remove('is-valid', 'is-invalid');
+    });
+    
+    // Fermer la modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+    if (modal) {
+        modal.hide();
+    }
+}
+
+// Confirmer la réservation
+function confirmerReservation() {
+    const nom = document.getElementById('nom').value.trim();
+    const prenom = document.getElementById('prenom').value.trim();
+    const telephone1El = document.getElementById('telephone1');
+    const telephone2El = document.getElementById('telephone2');
+    const emailEl = document.getElementById('email');
+    const telephone1 = telephone1El ? telephone1El.value.trim() : '';
+    const telephone2 = telephone2El ? telephone2El.value.trim() : '';
+    const email = emailEl ? emailEl.value.trim() : '';
+    const vehiculeSelect = document.getElementById('vehicule');
+    const vehicule = vehiculeSelect.options[vehiculeSelect.selectedIndex].getAttribute('data-vehicule');
+    const dateRecup = document.getElementById('dateRecuperation').value;
+    const dateRetour = document.getElementById('dateRetour').value;
+    const total = document.getElementById('total').value;
+    // (infos téléphone/email disponibles ici si besoin)
+    
+    // Fermer la modal de confirmation
+    const confirmationModal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+    if (confirmationModal) {
+        confirmationModal.hide();
+    }
+    
+    // Afficher la modal de succès
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    successModal.show();
+}
+
+// Réinitialiser le formulaire après confirmation
+function reinitialiserFormulaire() {
+    document.getElementById('reservationForm').reset();
+    document.getElementById('jours').value = 1;
+    document.getElementById('prixParJour').value = '';
+    document.getElementById('total').value = '';
+    document.getElementById('disponibiliteMessage').innerHTML = '';
+    
+    // Retirer les classes de validation
+    document.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
+        el.classList.remove('is-valid', 'is-invalid');
+    });
+    
+    // Réinitialiser les dates min
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('dateRecuperation').setAttribute('min', today);
+    document.getElementById('dateRetour').setAttribute('min', today);
+}
+</script>
 </body>
 </html>
+

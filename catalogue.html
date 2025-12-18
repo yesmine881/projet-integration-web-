@@ -1,80 +1,366 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Catalogue - Loca Mode</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalogue - Loca Mode</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- FontAwesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS perso -->
-    <link rel="stylesheet" href="style.css">
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="bg-dark text-white py-3">
-    <div class="container d-flex justify-content-between">
-        <h1 class="logo">Loca Mode</h1>
-        <nav>
-            <a href="index.html" class="text-white me-3">Accueil</a>
-            <a href="catalogue.html" class="text-white me-3">Catalogue</a>
-            <a href="reservation.html" class="text-white">Réserver</a>
-        </nav>
-    </div>
+<!-- Skip link pour navigation au clavier -->
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="container header-menu">
+    <nav role="navigation" aria-label="Menu principal">
+      <ul class="menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="catalogue.html" aria-current="page">Voitures</a></li>
+
+        <li class="menu-logo">
+          <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;" aria-label="Retour à la page d'accueil - Loca Mode">
+            <img src="logo.png" alt="Logo Loca Mode">
+            <div class="logo-text">
+              <span class="logo-title">LOCA-MOVE</span>
+              <span class="logo-subtitle">Location de voitures</span>
+            </div>
+          </a>
+        </li>
+
+        <li><a href="agence.html">Agence</a></li>
+        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="contact.html">Contactez‑nous</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<section class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Notre Catalogue</h2>
+<main id="main-content">
+<section class="container py-5 text-center">
+<h2>Notre Catalogue de Voitures</h2>
 
+<!-- FILTRES PAR MARQUE ET CATÉGORIE -->
+<div class="mb-4">
+<div class="row mb-4">
+<div class="col-md-6">
+<h4 class="mb-3">Filtrer par marque :</h4>
+<select id="filtreMarque" class="form-select form-select-lg filter-select" onchange="filtrerParMarque(this.value)" aria-label="Filtrer par marque de véhicule">
+<option value="all" selected>Toutes les marques</option>
+<option value="Skoda">Skoda</option>
+<option value="Volkswagen">Volkswagen</option>
+<option value="Seat">Seat</option>
+<option value="Mercedes">Mercedes</option>
+<option value="Hyundai">Hyundai</option>
+<option value="Suzuki">Suzuki</option>
+<option value="Cupra">Cupra</option>
+</select>
+</div>
+<div class="col-md-6">
+<h4 class="mb-3">Filtrer par catégorie :</h4>
+<select id="filtreCategorie" class="form-select form-select-lg filter-select" onchange="filtrerParCategorie(this.value)" aria-label="Filtrer par catégorie de véhicule">
+<option value="all" selected>Toutes les catégories</option>
+<option value="Compacte">Compacte</option>
+<option value="Prestige">Prestige</option>
+<option value="Familiale">Familiale</option>
+</select>
+</div>
+</div>
+</div>
+
+<div class="row">
+
+<!-- ================= SKODA & VOLKSWAGEN ================= -->
+<div class="col-md-4 vehicle" data-type="renault" data-marque="Skoda" data-categorie="Compacte" data-vehicule="SKODA FABIA">
+<div class="card">
+<img src="fabia-22.png" alt="SKODA FABIA">
+<h5>SKODA FABIA</h5>
+<p>150DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('SKODA FABIA', 'fabia-22.png', '150', 'Skoda', 'Compacte', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de SKODA FABIA">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('SKODA FABIA', '150')" aria-label="Réserver SKODA FABIA">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="renault" data-marque="Volkswagen" data-categorie="Compacte">
+<div class="card">
+<img src="vw-polo.png" alt="VOLKSWAGEN POLO">
+<h5>VOLKSWAGEN POLO</h5>
+<p>180 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('VOLKSWAGEN POLO', 'vw-polo.png', '180', 'Volkswagen', 'Compacte', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de VOLKSWAGEN POLO">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('VOLKSWAGEN POLO', '180')" aria-label="Réserver VOLKSWAGEN POLO">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="renault" data-marque="Volkswagen" data-categorie="Prestige">
+<div class="card">
+<img src="vw-polo-sedan.png" alt="VOLKSWAGEN POLO SEDAN">
+<h5>VOLKSWAGEN POLO SEDAN</h5>
+<p>200 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('VOLKSWAGEN POLO SEDAN', 'vw-polo-sedan.png', '200', 'Volkswagen', 'Berline', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de VOLKSWAGEN POLO SEDAN">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('VOLKSWAGEN POLO SEDAN', '200')" aria-label="Réserver VOLKSWAGEN POLO SEDAN">Réserver</button>
+</div>
+</div>
+</div>
+
+<!-- ================= CUPRA & HYUNDAI ================= -->
+<div class="col-md-4 vehicle" data-type="peugeot" data-marque="Cupra" data-categorie="Compacte">
+<div class="card">
+<img src="cupra-leon.png" alt="Cupra Leon">
+<h5>Cupra Leon</h5>
+<p>160 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Cupra Leon', 'cupra-leon.png', '160', 'Cupra', 'Compacte', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de Cupra Leon">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Cupra Leon', '160')" aria-label="Réserver Cupra Leon">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="peugeot" data-marque="Hyundai" data-categorie="Compacte">
+<div class="card">
+<img src="hyundai-i10.png" alt="Hyundai i10">
+<h5>Hyundai i10</h5>
+<p>110 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Hyundai i10', 'hyundai-i10.png', '110', 'Hyundai', 'Citadine', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de Hyundai i10">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Hyundai i10', '110')" aria-label="Réserver Hyundai i10">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="peugeot" data-marque="Hyundai" data-categorie="Compacte">
+<div class="card">
+<img src="hyundai-i10-bva.png" alt="Hyundai i10 BVA">
+<h5>Hyundai i10 BVA</h5>
+<p>150 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Hyundai i10 BVA', 'hyundai-i10-bva.png', '150', 'Hyundai', 'Citadine', '5', 'Automatique', 'Essence')" aria-label="Voir les détails de Hyundai i10 BVA">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Hyundai i10 BVA', '150')" aria-label="Réserver Hyundai i10 BVA">Réserver</button>
+</div>
+</div>
+</div>
+
+<!-- ================= MERCEDES, SKODA & SEAT ================= -->
+<div class="col-md-4 vehicle" data-type="volkswagen" data-marque="Mercedes" data-categorie="Prestige">
+<div class="card">
+<img src="mercedes-e.png" alt="Mercedes class E">
+<h5>Mercedes class E</h5>
+<p>300DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Mercedes class E', 'mercedes-e.png', '300', 'Mercedes', 'Berline', '5', 'Automatique', 'Essence')" aria-label="Voir les détails de Mercedes class E">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Mercedes class E', '300')" aria-label="Réserver Mercedes class E">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="volkswagen" data-marque="Skoda" data-categorie="Familiale">
+<div class="card">
+<img src="skoda-octavia.png" alt="Skoda octavia">
+<h5>Skoda octavia</h5>
+<p>100 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Skoda octavia', 'skoda-octavia.png', '100', 'Skoda', 'Berline', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de Skoda octavia">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Skoda octavia', '100')" aria-label="Réserver Skoda octavia">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="volkswagen" data-marque="Seat" data-categorie="Familiale">
+<div class="card">
+<img src="seat-arona.png" alt="Seat Arona">
+<h5>Seat Arona</h5>
+<p>160 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Seat Arona', 'seat-arona.png', '160', 'Seat', 'SUV', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de Seat Arona">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Seat Arona', '160')" aria-label="Réserver Seat Arona">Réserver</button>
+</div>
+</div>
+</div>
+
+<!-- ================= SEAT ================= -->
+<div class="col-md-4 vehicle" data-type="toyota" data-marque="Seat" data-categorie="Prestige">
+<div class="card">
+<img src="seat-ateca-fr.png" alt="Seat ATECA">
+<h5>Seat ATECA</h5>
+<p>250 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Seat ATECA', 'seat-ateca-fr.png', '250', 'Seat', 'SUV', '5', 'Automatique', 'Essence')" aria-label="Voir les détails de Seat ATECA">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Seat ATECA', '250')" aria-label="Réserver Seat ATECA">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="toyota" data-marque="Seat" data-categorie="Compacte">
+<div class="card">
+<img src="seat-ibiza-bva.png" alt="Seat ibiza BVA">
+<h5>Seat ibiza BVA</h5>
+<p>120 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Seat ibiza BVA', 'seat-ibiza-bva.png', '120', 'Seat', 'Compacte', '5', 'Automatique', 'Essence')" aria-label="Voir les détails de Seat ibiza BVA">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Seat ibiza BVA', '120')" aria-label="Réserver Seat ibiza BVA">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="toyota" data-marque="Seat" data-categorie="Compacte">
+<div class="card">
+<img src="seat-ibiza.png" alt="Seat Ibiza">
+<h5>Seat Ibiza</h5>
+<p>170 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Seat Ibiza', 'seat-ibiza.png', '170', 'Seat', 'Compacte', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de Seat Ibiza">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Seat Ibiza', '170')" aria-label="Réserver Seat Ibiza">Réserver</button>
+</div>
+</div>
+</div>
+
+<!-- ================= SKODA & SUZUKI ================= -->
+<div class="col-md-4 vehicle" data-type="hyundai" data-marque="Skoda" data-categorie="Familiale">
+<div class="card">
+<img src="skoda-octavia.png" alt="Skoda Scala">
+<h5>Skoda Scala</h5>
+<p>185 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Skoda Scala', 'skoda-octavia.png', '185', 'Skoda', 'Berline', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de Skoda Scala">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Skoda Scala', '185')" aria-label="Réserver Skoda Scala">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="hyundai" data-marque="Suzuki" data-categorie="Familiale">
+<div class="card">
+<img src="suzuki-ciaz.png" alt="SUZUKI CIAZ">
+<h5>SUZUKI CIAZ</h5>
+<p>150 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('SUZUKI CIAZ', 'suzuki-ciaz.png', '150', 'Suzuki', 'Berline', '5', 'Manuelle', 'Essence')" aria-label="Voir les détails de SUZUKI CIAZ">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('SUZUKI CIAZ', '150')" aria-label="Réserver SUZUKI CIAZ">Réserver</button>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 vehicle" data-type="hyundai" data-marque="Suzuki" data-categorie="Familiale">
+<div class="card">
+<img src="Suziki-Ertiga.png" alt="Suziki Ertiga">
+<h5>Suziki Ertiga</h5>
+<p>170 DT / jour</p>
+<div class="card-buttons">
+<button class="btn btn-outline-primary btn-sm" onclick="voirDetails('Suziki Ertiga', 'Suziki-Ertiga.png', '170', 'Suzuki', 'MPV', '7', 'Manuelle', 'Essence')" aria-label="Voir les détails de Suziki Ertiga">Voir plus</button>
+<button class="btn btn-primary btn-sm" onclick="reserver('Suziki Ertiga', '170')" aria-label="Réserver Suziki Ertiga">Réserver</button>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+</main>
+
+<!-- ================= MODAL DÉTAILS PRODUIT ================= -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Détails du véhicule</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="images/voitures/voiture1.jpg" class="card-img-top" alt="Clio 5">
-                    <div class="card-body">
-                        <h5>Clio 5</h5>
-                        <p>90 DT / jour</p>
-                        <a href="reservation.html" class="btn btn-primary">Réserver</a>
-                    </div>
-                </div>
-            </div>
+          <div class="col-md-6">
+            <img id="modalImage" src="" alt="Voiture" class="img-fluid rounded mb-3">
+          </div>
+          <div class="col-md-6">
+            <h4 id="modalTitle" class="text-primary mb-3"></h4>
+            <p class="fs-4 text-danger fw-bold mb-3" id="modalPrice"></p>
+            <hr>
+            <h6 class="fw-bold">Caractéristiques :</h6>
+            <ul class="list-unstyled">
+              <li><strong>Marque :</strong> <span id="modalMarque"></span></li>
+              <li><strong>Catégorie :</strong> <span id="modalCategorie"></span></li>
+              <li><strong>Nombre de places :</strong> <span id="modalPlaces"></span></li>
+              <li><strong>Transmission :</strong> <span id="modalTransmission"></span></li>
+              <li><strong>Carburant :</strong> <span id="modalCarburant"></span></li>
+            </ul>
+            <hr>
+            <p class="text-muted">Véhicule disponible et prêt à être loué. Contactez-nous pour plus d'informations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" id="btnReserverModal">Réserver maintenant</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="images/voitures/voiture2.jpg" class="card-img-top" alt="Tiguan">
-                    <div class="card-body">
-                        <h5>Tiguan</h5>
-                        <p>150 DT / jour</p>
-                        <a href="reservation.html" class="btn btn-primary">Réserver</a>
-                    </div>
-                </div>
-            </div>
+<!-- ================= FOOTER ================= -->
+<footer>
+    <div class="container text-center">
+        <p>Suivez‑nous sur les réseaux sociaux</p>
 
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="images/motos/moto1.jpg" class="card-img-top" alt="MT-07">
-                    <div class="card-body">
-                        <h5>Yamaha MT-07</h5>
-                        <p>130 DT / jour</p>
-                        <a href="reservation.html" class="btn btn-primary">Réserver</a>
-                    </div>
-                </div>
-            </div>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
         </div>
 
+        <p class="mt-2">© 2025 Loca Mode – Tous droits réservés</p>
     </div>
-</section>
-
-<footer class="bg-dark text-white text-center py-3">
-    © 2025 Loca Mode
 </footer>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script/app.js"></script>
+<script>
+// Fonction pour afficher les détails dans la modal
+function voirDetails(nom, image, prix, marque, categorie, places, transmission, carburant) {
+    document.getElementById('modalTitle').textContent = nom;
+    document.getElementById('modalImage').src = image;
+    document.getElementById('modalPrice').textContent = prix + ' DT / jour';
+    document.getElementById('modalMarque').textContent = marque;
+    document.getElementById('modalCategorie').textContent = categorie;
+    document.getElementById('modalPlaces').textContent = places;
+    document.getElementById('modalTransmission').textContent = transmission;
+    document.getElementById('modalCarburant').textContent = carburant;
+    
+    // Stocker les informations pour le bouton réserver de la modal
+    document.getElementById('btnReserverModal').onclick = function() {
+        reserver(nom, prix);
+    };
+    
+    // Ouvrir la modal
+    var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+    modal.show();
+}
+
+// Fonction pour rediriger vers la page de réservation
+function reserver(nom, prix) {
+    // Stocker les informations dans localStorage pour les récupérer sur la page de réservation
+    localStorage.setItem('vehiculeReserve', nom);
+    localStorage.setItem('prixReserve', prix);
+    
+    // Rediriger vers la page de réservation
+    window.location.href = 'reservation.html';
+}
+</script>
 </body>
 </html>

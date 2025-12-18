@@ -11,75 +11,171 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
+<!-- FontAwesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <!-- CSS -->
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- Skip link pour navigation au clavier -->
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<!-- ================= HEADER ================= -->
 <header>
-    <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="logo">Loca Mode</h1>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="catalogue.html">Catalogue</a>
-            <a href="reservation.html">Réserver</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </div>
+  <div class="container header-menu">
+    <nav role="navigation" aria-label="Menu principal">
+      <ul class="menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="catalogue.html">Voitures</a></li>
+
+        <li class="menu-logo">
+          <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;" aria-label="Retour à la page d'accueil - Loca Mode">
+            <img src="logo.png" alt="Logo Loca Mode">
+            <div class="logo-text">
+              <span class="logo-title">LOCA-MOVE</span>
+              <span class="logo-subtitle">Location de voitures</span>
+            </div>
+          </a>
+        </li>
+
+        <li><a href="agence.html">Agence</a></li>
+        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="contact.html" aria-current="page">Contactez‑nous</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <!-- SECTION CONTACT -->
+<main id="main-content">
 <section class="container py-5">
     <h2 class="text-center mb-4">Contactez‑nous</h2>
+    
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="bg-light-orange p-4 rounded">
+                <h3 class="text-center mb-3">Notre Engagement Professionnel</h3>
+                <p class="text-center mb-0">
+                    Chez <strong>Loca Mode</strong>, nous sommes dédiés à offrir un service de location de véhicules 
+                    de qualité supérieure. Notre équipe professionnelle et expérimentée est à votre disposition 
+                    pour vous accompagner dans tous vos déplacements. Nous garantissons des véhicules modernes, 
+                    bien entretenus et conformes aux normes de sécurité les plus strictes. 
+                    Votre satisfaction et votre sécurité sont nos priorités absolues.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <!-- FORMULAIRE -->
         <div class="col-md-6">
-            <form class="bg-light-orange p-4">
+            <form class="bg-light-orange p-4" id="contactForm">
 
                 <div class="mb-3">
-                    <label for="nom" class="form-label">Nom complet</label>
-                    <input type="text" id="nom" class="form-control" placeholder="Votre nom" required>
+                    <label for="nom" class="form-label">Nom complet <span class="text-danger">*</span></label>
+                    <input type="text" id="nom" class="form-control" placeholder="Votre nom" required aria-required="true">
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" id="email" class="form-control" placeholder="exemple@email.com" required>
+                    <label for="email" class="form-label">Adresse email <span class="text-danger">*</span></label>
+                    <input type="email" id="email" class="form-control" placeholder="exemple@email.com" required aria-required="true">
                 </div>
 
                 <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea id="message" class="form-control" rows="5" placeholder="Votre message..." required></textarea>
+                    <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+                    <textarea id="message" class="form-control" rows="5" placeholder="Votre message..." required aria-required="true"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">
-                    Envoyer le message
+                <button type="submit" class="btn btn-primary w-100" aria-label="Envoyer le message de contact">
+                    <i class="fas fa-paper-plane"></i> Envoyer le message
                 </button>
 
             </form>
         </div>
 
-        <!-- INFOS -->
+        <!-- INFOS & ADRESSES AGENCES -->
         <div class="col-md-6 d-flex flex-column justify-content-center">
-            <h4>Nos coordonnées</h4>
-            <p>📍 Tunis, Tunisie</p>
-            <p>📞 +216 99 999 999</p>
-            <p>📧 contact@locamode.tn</p>
+            <h4 class="mb-4">Nos Coordonnées</h4>
+            
+            <div class="mb-4">
+                <h5><i class="fas fa-phone text-primary"></i> Contact</h5>
+                <p class="mb-1"><strong>Téléphone :</strong> +216 71 123 456</p>
+                <p class="mb-1"><strong>Email :</strong> contact@locamode.tn</p>
+                <p class="mb-0"><strong>Horaires :</strong> Lundi - Dimanche : 8h00 - 20h00</p>
+            </div>
 
-            <p class="mt-3">
-                Notre équipe est disponible 7j/7 pour répondre à toutes vos questions
-                concernant la location de voitures et motos.
+            <div class="mb-4">
+                <h5><i class="fas fa-map-marker-alt text-primary"></i> Nos Agences</h5>
+                
+                <div class="mb-3">
+                    <strong>Tunis</strong><br>
+                    <small class="text-muted">Avenue Habib Bourguiba, Centre-ville, 1000 Tunis</small><br>
+                    <small>Tél: +216 71 123 456</small>
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Sousse</strong><br>
+                    <small class="text-muted">Boulevard de la Corniche, Zone touristique, 4000 Sousse</small><br>
+                    <small>Tél: +216 73 234 567</small>
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Sfax</strong><br>
+                    <small class="text-muted">Route de l'Aéroport, Zone industrielle, 3000 Sfax</small><br>
+                    <small>Tél: +216 74 345 678</small>
+                </div>
+            </div>
+
+            <p class="mt-3 text-muted">
+                <i class="fas fa-info-circle"></i> Notre équipe professionnelle est disponible 7j/7 
+                pour répondre à toutes vos questions concernant la location de voitures. 
+                N'hésitez pas à nous contacter pour toute demande d'information ou d'assistance.
             </p>
         </div>
     </div>
 </section>
+</main>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer>
-    <p>© 2025 Loca Mode – Tous droits réservés</p>
+    <div class="container text-center">
+        <p>Suivez‑nous sur les réseaux sociaux</p>
+
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+        </div>
+
+        <p class="mt-2">© 2025 Loca Mode – Tous droits réservés</p>
+    </div>
 </footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Gérer la soumission du formulaire de contact
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nom = document.getElementById('nom').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (!nom || !email || !message) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return false;
+    }
+    
+    alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+    this.reset();
+});
+</script>
 
 </body>
 </html>
